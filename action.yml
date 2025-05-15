@@ -40,6 +40,10 @@ inputs:
     description: "Function and arguments for dagger call"
     required: false
     default: ""
+  cache-config:
+    description: "Cache configuration"
+    required: false
+    default: ""
 outputs:
   output:
     description: "Job output"
@@ -77,6 +81,7 @@ runs:
       shell: bash
       env:
         INPUT_MODULE: ${{ inputs.module }}
+        _EXPERIMENTAL_DAGGER_CACHE_CONFIG: ${{ inputs.cache-config }}
       run: |
         tmpout=$(mktemp)
         cd ${{ inputs.workdir }}
